@@ -35,7 +35,7 @@ const request = Axios({
 }
 
 export function getPosts(post){
-    const request = Axios(`${FirebaseDB}/posts.json?auth=${TOKEN}`)
+    const request = Axios(`${FirebaseDB}/posts.json`)
         .then(response => {
             let posts =[]
 

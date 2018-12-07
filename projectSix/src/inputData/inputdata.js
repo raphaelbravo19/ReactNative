@@ -11,6 +11,8 @@ class InputData extends Component {
     state = {
         title: '',
         body: '',
+        posts: [],
+        selected: 'value1',
     }
     handleTitleInput = (title) => {
         this.setState({title})
@@ -21,15 +23,24 @@ class InputData extends Component {
     addPost = () => {
         let element =  {title: this.state.title, body: this.state.body};
         this.props.addPost(element)
+        this.componentWillMount()
        }
-
-    componentDidMount(){
-        this.props.getPosts()
-        this.props.getPost('-LT867aZkSHOdvuXjaK6')
-        //this.props.updatePost('-LT867aZkSHOdvuXjaK6')
-        //this.props.deletePost(this.state.target)
-        //"-LT867aZkSHOdvuXjaK6"
+    componentWillMount(){
+        this.props.getPosts().then(()=>{
+            //console.log(this.props.Articles.posts)
+            this.setState({
+                posts:this.props.Articles.posts
+                
+            })
+            this.setState({
+                selected:this.state.posts[0].id
+            })
+            
+            //console.log(this.state.posts)
+            //console.log(this.state.posts[0].title)
+        })
     }
+    
     render(){
         return(
             <View style={styles.formContainer}>
@@ -50,10 +61,30 @@ class InputData extends Component {
                     />
                 </View>
                 <Button
-                    title="Add post"
+                    title={this.state.posts.length.toString()}
                     onPress={this.addPost}
                 />
-            </View>
+                {
+                    this.state.posts.length>0 ?
+                    <Picker 
+                    style={{width:'60%',backgroundColor:'red'}}
+                    selectedValue={this.state.selected}
+                    onValueChange={(itemValue) => this.setState({selected: itemValue})}
+                    >
+                    {this.state.posts.map(item=>(
+                        <Picker.Item label={item.title} value={item.id}/>))}
+                    </Picker>:null
+
+                    /*<Picker>
+                        {
+                            this.state.posts.map(item=>(
+                            <Picker.Item label={item.title} value=""/>{}</Text>
+                    ))
+                        }
+                    </Picker>*/
+                    
+                }
+                </View>
         )
     }
 }
@@ -79,10 +110,12 @@ class InputData extends Component {
 
 
  function mapStateToProps(state){
-     console.log(state)
-     return{
-         articles:state.articles
-     }
+    console.log("entre")
+    console.log(state)
+    console.log("entre2")
+    return{
+        Articles:state.articles
+    }
  }
 
  function mapDispatchToProps(dispatch){
