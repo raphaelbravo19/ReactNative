@@ -9,13 +9,15 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
-import Articles from './src/Articles'
+import Articles from './src/Articles';
+import InputData from './src/inputData/inputdata';
+import LoginUser from './src/Login';
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Articles/>
+        <LoginUser/>
       </View>
     );
   }
