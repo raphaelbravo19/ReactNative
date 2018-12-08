@@ -11,11 +11,13 @@ import {StyleSheet, View, Text , Button, Image, Modal, TextInput,ImageBackground
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import HomeScreen from './src/home';
 import LoginScreen from './src/login';
+import RegisterScreen from './src/register';
 
 const App = createStackNavigator(
   {
     Home: HomeScreen,
-    Login: LoginScreen
+    Login: LoginScreen,
+    Register: RegisterScreen
   }
 );
 

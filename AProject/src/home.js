@@ -6,6 +6,8 @@ import Navbar from './components/navbar';
 import Background from './images/bg.jpg';
 import Logo from './images/logo.png';
 import Gradient from './images/gradient.jpg';
+
+
 class HomeScreen extends Component{
     static navigationOptions={
        header:null
@@ -17,15 +19,14 @@ class HomeScreen extends Component{
                         <Image source={Logo} style={styles.logo} resizeMode="center"/>
                     </View>
                     <View style={styles.containerActions}>
-                        <TouchableOpacity style={styles.backButton}>
-                            <ImageBackground source={Gradient} style={styles.grad}> 
-                                <Text style={styles.textLogin}>Ingresar</Text>
-                            </ImageBackground>
+                        <TouchableOpacity>
+                            <Text style={styles.textLogin} onPress={() => this.props.navigation.navigate('Login')}>INGRESAR</Text>      
                         </TouchableOpacity>
                         
-                        <Button title="Go to login" onPress={() => this.props.navigation.navigate('Login')}/>
+                        <TouchableOpacity>
+                            <Text style={[styles.textLogin,{marginTop:10}]}  onPress={() => this.props.navigation.navigate('Register')}>REGISTRATE</Text>      
+                        </TouchableOpacity>
                     </View>
-                    
                 </ImageBackground>
                 
         )
@@ -44,20 +45,16 @@ const styles = StyleSheet.create({
     containerActions:{
         flex:1,
         alignItems: 'center',
-    },
-    backButton:{
-        width: '100%',
-        alignItems: 'center',
-    },
-    grad:{
-        backgroundColor:'red',
-        alignItems: 'center',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+        justifyContent: 'center',
     },
     textLogin:{
+        backgroundColor:'#777677',
         color:'white',
         fontSize: 20,
+        paddingVertical: 12,
+        paddingHorizontal: 40,
+        borderRadius: 20,
+        fontFamily: 'Ubuntu-Bold',
     },
     logo:{
         width: '100%',
